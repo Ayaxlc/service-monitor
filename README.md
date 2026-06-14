@@ -12,18 +12,19 @@ Script en Python que monitoriza el estado de servicios web y guarda un historial
 
 - Python 3
 - requests
+- Docker
 
 ## Como usarlo
 
-1. Clona el repositorio
-2. Instala la dependencia
-3. Ejecuta el script
+### Con Python
 
-instalacion:
 pip install requests
-
-ejecucion:
 python monitor.py
+
+### Con Docker
+
+docker build -t service-monitor .
+docker run service-monitor
 
 ## Ejemplo de salida
 
