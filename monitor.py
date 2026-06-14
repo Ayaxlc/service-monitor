@@ -1,8 +1,6 @@
 import requests
 import datetime
-import os
 
-# Lista de URLs a monitorizar
 URLS = [
     "https://google.com",
     "https://github.com",
@@ -13,25 +11,25 @@ LOG_FILE = "monitor.log"
 
 def log(mensaje):
     ahora = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    linea = f"[{ahora}] {mensaje}"
+    linea = "[" + ahora + "] " + mensaje
     print(linea)
-    with open(LOG_FILE, "a") as f:
+    with open(LOG_FILE, "a", encoding="utf-8") as f:
         f.write(linea + "\n")
 
 def verificar_url(url):
     try:
         respuesta = requests.get(url, timeout=5)
         if respuesta.status_code == 200:
-            log(f"✅ OK       - {url}")
+            log("OK - " + url)
         else:
-            log(f"⚠️  ERROR {respuesta.status_code} - {url}")
+            log("ERROR " + str(respuesta.status_code) + " - " + url)
     except Exception:
-        log(f"❌ CAÍDO    - {url}")
+        log("CAIDO - " + url)
 
 def ejecutar_monitor():
-    log("🔍 Iniciando comprobación de servicios...")
+    log("Iniciando comprobacion de servicios...")
     for url in URLS:
         verificar_url(url)
-    log("✅ Comprobación finalizada.\n")
+    log("Comprobacion finalizada.")
 
 ejecutar_monitor()
